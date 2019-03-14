@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2017, 11, 01),
+    'start_date': datetime(2017, 11, 1),
     'retries': 0,
     'retry_delay': timedelta(minutes=2),
     'provide_context': True
@@ -46,7 +46,7 @@ def transform_movies_to_parquet(**kwargs):
     headers = emr.create_spark_session(cluster_dns, 'spark')
     session_url = emr.wait_for_idle_session(cluster_dns, headers)
     statement_response = emr.submit_statement(session_url,
-                                              '/root/airflow/dags/transform/movies.scala')
+                                              '/airflow/dags/transform/movies.scala')
     emr.track_statement_progress(cluster_dns, statement_response.headers)
     emr.kill_spark_session(session_url)
 
@@ -58,7 +58,7 @@ def transform_tags_to_parquet(**kwargs):
     headers = emr.create_spark_session(cluster_dns, 'spark')
     session_url = emr.wait_for_idle_session(cluster_dns, headers)
     statement_response = emr.submit_statement(session_url,
-                                              '/root/airflow/dags/transform/tags.scala')
+                                              '/airflow/dags/transform/tags.scala')
     emr.track_statement_progress(cluster_dns, statement_response.headers)
     emr.kill_spark_session(session_url)
 
@@ -70,7 +70,7 @@ def transform_ratings_to_parquet(**kwargs):
     headers = emr.create_spark_session(cluster_dns, 'spark')
     session_url = emr.wait_for_idle_session(cluster_dns, headers)
     statement_response = emr.submit_statement(session_url,
-                                              '/root/airflow/dags/transform/ratings.scala')
+                                              '/airflow/dags/transform/ratings.scala')
     emr.track_statement_progress(cluster_dns, statement_response.headers)
     emr.kill_spark_session(session_url)
 
@@ -82,7 +82,7 @@ def transform_links_to_parquet(**kwargs):
     headers = emr.create_spark_session(cluster_dns, 'spark')
     session_url = emr.wait_for_idle_session(cluster_dns, headers)
     statement_response = emr.submit_statement(session_url,
-                                              '/root/airflow/dags/transform/links.scala')
+                                              '/airflow/dags/transform/links.scala')
     emr.track_statement_progress(cluster_dns, statement_response.headers)
     emr.kill_spark_session(session_url)
 
@@ -94,7 +94,7 @@ def transform_genome_scores_to_parquet(**kwargs):
     headers = emr.create_spark_session(cluster_dns, 'spark')
     session_url = emr.wait_for_idle_session(cluster_dns, headers)
     statement_response = emr.submit_statement(session_url,
-                                              '/root/airflow/dags/transform/genome_scores.scala')
+                                              '/airflow/dags/transform/genome_scores.scala')
     emr.track_statement_progress(cluster_dns, statement_response.headers)
     emr.kill_spark_session(session_url)
 
@@ -106,7 +106,7 @@ def transform_genome_tags_to_parquet(**kwargs):
     headers = emr.create_spark_session(cluster_dns, 'spark')
     session_url = emr.wait_for_idle_session(cluster_dns, headers)
     statement_response = emr.submit_statement(session_url,
-                                              '/root/airflow/dags/transform/genome_tags.scala')
+                                              '/airflow/dags/transform/genome_tags.scala')
     emr.track_statement_progress(cluster_dns, statement_response.headers)
     emr.kill_spark_session(session_url)
 
